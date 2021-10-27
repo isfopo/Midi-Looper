@@ -8,7 +8,7 @@ max.addHandler("existingNotes", (dict) => {
 })
 
 max.addHandler("noteOn", (pitch, start_time, abs_start_time, velocity) => {
-  if (existingNotes.filter(note => note.pitch === pitch && note.start_time.toFixed(1) === start_time.toFixed(1)).length === 0 ) {
+  if (existingNotes.filter(note => note.pitch === pitch && note.start_time.toFixed() === start_time.toFixed()).length === 0 ) {
     notes.push({ pitch, start_time, abs_start_time, velocity });
     max.post("note not in clip");
   } else {
@@ -27,7 +27,6 @@ max.addHandler("noteOff", (pitch, abs_end_time) => {
         duration: abs_end_time - note.abs_start_time,
         velocity: note.velocity
       });
-      notes = notes.filter(note => note.pitch !== pitch);
     }
   }
 });
